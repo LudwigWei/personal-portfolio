@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Github, ArrowLeft } from "lucide-react";
+import { useState } from "react";
 import { projects } from "@/lib/portfolio-data";
+import { ImageModal } from "@/components/ImageModal";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -15,14 +17,18 @@ export const Route = createFileRoute("/projects")({
 });
 
 function ProjectsPage() {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxSrc, setLightboxSrc] = useState<string | undefined>(undefined);
+  const [lightboxAlt, setLightboxAlt] = useState<string | undefined>(undefined);
+
   return (
     <div className="min-h-screen bg-[var(--color-background)] text-neutral-900 font-sans">
       <header className="sticky top-0 z-50 bg-[var(--color-background)]/90 backdrop-blur border-b border-neutral-300">
         <nav className="max-w-7xl mx-auto px-6 h-[4.5rem] flex items-center justify-between">
           <Link to="/" className="font-bold text-4xl tracking-tight">Portfolio.</Link>
-          <Link to="/#projects" className="inline-flex items-center gap-1.5 text-base hover:text-neutral-600">
+          <a href="/#projects" className="inline-flex items-center gap-1.5 text-base hover:text-neutral-600">
             <ArrowLeft className="w-4 h-4" /> Return
-          </Link>
+          </a>
         </nav>
       </header>
 
@@ -32,21 +38,24 @@ function ProjectsPage() {
 
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => (
-            <article key={p.title} className="bg-white rounded-xl p-6 shadow-sm flex flex-col min-h-[580px]">
+            <article
+              key={p.title}
+              className="bg-white rounded-xl p-6 shadow-sm flex flex-col min-h-[580px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105"
+            >
               <div className="aspect-video bg-neutral-200 rounded-lg overflow-hidden relative">
                 {p.image ? (
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
-                ) : null}
-                {p.repo ? (
-                  <a
-                    href={p.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View ${p.title} on GitHub`}
-                    className="absolute top-3 right-3 bg-gray-700 p-2 rounded shadow-sm hover:bg-gray-800 z-10 transform transition-transform duration-200 hover:scale-110"
-                  >
-                    <Github className="w-4 h-4 text-white" />
-                  </a>
+                  <>
+                    <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                    <button
+                      onClick={() => {
+                        setLightboxSrc(p.image);
+                        setLightboxAlt(p.title);
+                        setLightboxOpen(true);
+                      }}
+                      aria-label={`Open ${p.title} image`}
+                      className="absolute inset-0 w-full h-full bg-transparent"
+                    />
+                  </>
                 ) : null}
               </div>
 
@@ -66,10 +75,23 @@ function ProjectsPage() {
                   </span>
                 ))}
               </div>
+
+              {p.repo ? (
+                <a
+                  href={p.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center justify-center gap-2 border border-neutral-300 rounded-lg py-2 text-sm font-medium hover:bg-neutral-50 transition"
+                >
+                  View on GitHub <Github className="w-4 h-4" />
+                </a>
+              ) : null}
             </article>
           ))}
         </div>
       </main>
+
+      <ImageModal open={lightboxOpen} src={lightboxSrc} alt={lightboxAlt} onClose={() => setLightboxOpen(false)} />
     </div>
   );
 }

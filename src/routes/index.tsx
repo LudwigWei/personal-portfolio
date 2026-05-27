@@ -316,17 +316,6 @@ function Index() {
                       />
                     </>
                   ) : null}
-                  {p.repo ? (
-                    <a
-                      href={p.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${p.title} on GitHub`}
-                      className="absolute top-3 right-3 bg-gray-700 p-2 rounded shadow-sm hover:bg-gray-800 z-10 transform transition-transform duration-200 hover:scale-110"
-                    >
-                      <Github className="w-4 h-4 text-white" />
-                    </a>
-                  ) : null}
                 </div>
 
                 <div className="mt-4 flex items-start justify-between gap-4">
@@ -345,6 +334,17 @@ function Index() {
                     </span>
                   ))}
                 </div>
+
+                {p.repo ? (
+                  <a
+                    href={p.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center justify-center gap-2 border border-neutral-300 rounded-lg py-2 text-sm font-medium hover:bg-neutral-50 transition"
+                  >
+                    View on GitHub <Github className="w-4 h-4" />
+                  </a>
+                ) : null}
               </article>
             ))}
           </div>

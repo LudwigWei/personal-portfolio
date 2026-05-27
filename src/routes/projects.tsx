@@ -33,17 +33,39 @@ function ProjectsPage() {
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => (
             <article key={p.title} className="bg-white rounded-xl p-6 shadow-sm flex flex-col min-h-[580px]">
-              <div className="aspect-[4/3] bg-neutral-200 rounded-lg" />
-              <h3 className="mt-4 font-bold text-2xl">{p.title}</h3>
-              <p className="mt-2 text-md text-neutral-600 flex-1">{p.desc}</p>
+              <div className="aspect-video bg-neutral-200 rounded-lg overflow-hidden relative">
+                {p.image ? (
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                ) : null}
+                {p.repo ? (
+                  <a
+                    href={p.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${p.title} on GitHub`}
+                    className="absolute top-3 right-3 bg-gray-700 p-2 rounded shadow-sm hover:bg-gray-800 z-10 transform transition-transform duration-200 hover:scale-110"
+                  >
+                    <Github className="w-4 h-4 text-white" />
+                  </a>
+                ) : null}
+              </div>
+
+              <div className="mt-4 flex items-start justify-between gap-4">
+                <h3 className="font-bold text-2xl">{p.title}</h3>
+              </div>
+
+              <p className="mt-2 text-md text-neutral-600 flex-1 text-justify">{p.desc}</p>
+
               <div className="mt-3 flex flex-wrap gap-2">
-                {p.tags.map((tag) => (
-                  <span key={tag} className="text-xs bg-neutral-100 border border-neutral-200 rounded-md px-2 py-0.5">{tag}</span>
+                {p.tags?.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs bg-neutral-100 border border-neutral-200 rounded-md px-2 py-0.5 transform transition-all duration-150 hover:bg-neutral-200 hover:scale-105 cursor-pointer"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
-              <a href="#" className="mt-4 inline-flex items-center justify-center gap-2 border border-neutral-300 rounded-lg py-2 text-sm font-medium hover:bg-neutral-50 transition">
-                View on GitHub <Github className="w-4 h-4" />
-              </a>
             </article>
           ))}
         </div>

@@ -213,7 +213,7 @@ function Index() {
           <div className="mt-10 grid md:grid-cols-2 gap-6">
             <div className="space-y-6">
               {/* Education */}
-              <div className="bg-white rounded-xl p-7 shadow-sm min-h-[200px]">
+              <div className="bg-white rounded-xl p-7 shadow-sm min-h-[200px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
                 <div className="flex items-center gap-2 font-semibold text-base">
                   <GraduationCap className="w-5 h-5" /> EDUCATION
                 </div>
@@ -226,7 +226,7 @@ function Index() {
               </div>
 
               {/* Experience */}
-              <div className="bg-white rounded-xl p-7 shadow-sm min-h-[220px]">
+              <div className="bg-white rounded-xl p-7 shadow-sm min-h-[220px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
                 <div className="flex items-center gap-2 font-semibold text-base">
                   <Briefcase className="w-5 h-5" /> EXPERIENCE
                 </div>
@@ -240,7 +240,7 @@ function Index() {
               </div>
 
               {/* Tech Stack */}
-              <div className="bg-white rounded-xl p-7 shadow-sm flex flex-col justify-center min-h-[200px]">
+              <div className="bg-white rounded-xl p-7 shadow-sm flex flex-col justify-center min-h-[200px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
                 <div className="flex items-center gap-2 font-semibold text-base">
                   <Cpu className="w-5 h-5" /> TECH STACK
                 </div>
@@ -274,7 +274,7 @@ function Index() {
             </div>
 
             {/* Life outside work */}
-            <div className="bg-white rounded-xl p-7 shadow-sm flex flex-col min-h-[420px]">
+            <div className="bg-white rounded-xl p-7 shadow-sm flex flex-col min-h-[420px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
               <div className="font-semibold text-base">LIFE OUTSIDE WORK</div>
               <div className="mt-4 flex-1 rounded-lg overflow-hidden bg-neutral-900 min-h-[300px] relative">
                 <DomeGallery

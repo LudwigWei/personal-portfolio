@@ -4,6 +4,7 @@ import subscriptionSaaS from "@/assets/subscription_based_saas.png";
 import pvtAnalysis from "@/assets/pvt_analysis_tool.png";  
 export const projects = [
   
+  // Featured Projects
   // Project 1
   {
     title: "Pizza Sales Analysis",

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Github, ArrowLeft } from "lucide-react";
+import { Github, ArrowLeft, LayoutDashboard } from "lucide-react";
 import { useState } from "react";
 import { projects } from "@/lib/portfolio-data";
 import { ImageModal } from "@/components/ImageModal";
@@ -76,7 +76,28 @@ function ProjectsPage() {
                 ))}
               </div>
 
-              {p.repo ? (
+              {p.tool ? (
+                <div className="mt-4 flex gap-3">
+                  {p.repo ? (
+                    <a
+                      href={p.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex flex-1 basis-1/2 items-center justify-center gap-2 border border-neutral-300 rounded-lg px-4 py-2 text-sm font-medium hover:bg-neutral-50 transition"
+                    >
+                      View on GitHub <Github className="w-4 h-4" />
+                    </a>
+                  ) : null}
+                  <a
+                    href={p.tool}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex flex-1 basis-1/2 items-center justify-center gap-2 bg-neutral-900 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-neutral-800 transition"
+                  >
+                    View Tool <LayoutDashboard className="w-4 h-4" />
+                  </a>
+                </div>
+              ) : p.repo ? (
                 <a
                   href={p.repo}
                   target="_blank"

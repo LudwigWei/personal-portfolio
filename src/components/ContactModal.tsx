@@ -86,9 +86,9 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
           <p className="text-xs tracking-widest text-neutral-600">OR CONNECT DIRECTLY</p>
           <div className="mt-5 flex items-center justify-center gap-6">
             <a href="https://github.com/LudwigWei" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-neutral-700 hover:text-neutral-900"><Github className="w-6 h-6" /></a>
-            <a href="https://www.facebook.com/crisaldolv" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-neutral-700 hover:text-neutral-900"><Facebook className="w-6 h-6" /></a>
-            <a href="https://www.instagram.com/crisaldolv_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-neutral-700 hover:text-neutral-900"><Instagram className="w-6 h-6" /></a>
             <a href="https://www.linkedin.com/in/louis-vincent-crisaldo-43aa403a9/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-neutral-700 hover:text-neutral-900"><Linkedin className="w-6 h-6" /></a>
+            <a href="https://www.instagram.com/crisaldolv_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-neutral-700 hover:text-neutral-900"><Instagram className="w-6 h-6" /></a>
+            <a href="https://www.facebook.com/crisaldolv" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-neutral-700 hover:text-neutral-900"><Facebook className="w-6 h-6" /></a>
           </div>
         </div>
       </div>

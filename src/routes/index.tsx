@@ -400,9 +400,9 @@ function Index() {
           <span>© 2026  LOUIS VINCENT CRISALDO</span>
           <div className="flex items-center gap-5">
             <a href="https://github.com/LudwigWei" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-1.5 rounded hover:bg-neutral-200"><Github className="w-5 h-5" /></a>
-            <a href="https://www.facebook.com/crisaldolv" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-1.5 rounded hover:bg-neutral-200"><Facebook className="w-5 h-5" /></a>
-            <a href="https://www.instagram.com/crisaldolv_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-1.5 rounded hover:bg-neutral-200"><Instagram className="w-5 h-5" /></a>
             <a href="https://www.linkedin.com/in/louis-vincent-crisaldo-43aa403a9/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-1.5 rounded hover:bg-neutral-200"><Linkedin className="w-5 h-5" /></a>
+            <a href="https://www.instagram.com/crisaldolv_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-1.5 rounded hover:bg-neutral-200"><Instagram className="w-5 h-5" /></a>
+            <a href="https://www.facebook.com/crisaldolv" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="p-1.5 rounded hover:bg-neutral-200"><Facebook className="w-5 h-5" /></a>
           </div>
         </div>
       </footer>

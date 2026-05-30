@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import profileImg from "@/assets/profile.png";
+import resumePdf from "@/assets/CRISALDO_RESUME.pdf";
 import { projects as allProjects } from "@/lib/portfolio-data";
 import { ContactModal } from "@/components/ContactModal";
 import { ImageModal } from "@/components/ImageModal";
@@ -173,7 +174,12 @@ function Index() {
               <a href="#contact" className="inline-flex items-center gap-2 bg-neutral-900 text-white rounded-full px-6 py-3 text-base font-medium hover:bg-neutral-800 transition">
                 <Phone className="w-5 h-5" /> Contact Now
               </a>
-              <a href="#" className="inline-flex items-center gap-2 bg-white border border-neutral-300 rounded-full px-6 py-3 text-base font-medium hover:bg-neutral-50 transition">
+              <a
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white border border-neutral-300 rounded-full px-6 py-3 text-base font-medium hover:bg-neutral-50 transition"
+              >
                 <Download className="w-5 h-5" /> Download Resume
               </a>
             </div>

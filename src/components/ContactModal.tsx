@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import { X, Github, Facebook, Instagram, Linkedin } from "lucide-react";
 
 export function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  // 1. Added 'subject' to the initial state
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -18,11 +21,38 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
 
   if (!open) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
+    // 2. Added a check to ensure the subject isn't empty
+    if (!form.name.trim() || !form.email.trim() || !form.subject.trim() || !form.message.trim()) return;
+
+    setIsSending(true);
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          user_name: form.name,
+          user_email: form.email,
+          subject: form.subject, // 3. Passed the subject to EmailJS
+          message: form.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      setSent(true);
+      // 4. Reset subject along with the rest of the form
+      setForm({ name: "", email: "", subject: "", message: "" });
+      
+      setTimeout(() => setSent(false), 3000);
+      
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      alert("Failed to send message. Please check your connection and try again.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -48,35 +78,53 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              maxLength={100}
+              disabled={isSending}
+              className="w-full bg-transparent border border-neutral-400 rounded-2xl px-5 py-4 text-base placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900 transition disabled:opacity-50"
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              maxLength={255}
+              disabled={isSending}
+              className="w-full bg-transparent border border-neutral-400 rounded-2xl px-5 py-4 text-base placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900 transition disabled:opacity-50"
+            />
+          </div>
+          
+          {/* 5. The new Subject Input */}
           <input
             type="text"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            maxLength={100}
-            className="w-full bg-transparent border border-neutral-400 rounded-2xl px-5 py-4 text-base placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900 transition"
+            placeholder="Subject"
+            value={form.subject}
+            onChange={(e) => setForm({ ...form, subject: e.target.value })}
+            maxLength={200}
+            disabled={isSending}
+            className="w-full bg-transparent border border-neutral-400 rounded-2xl px-5 py-4 text-base placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900 transition disabled:opacity-50"
           />
-          <input
-            type="email"
-            placeholder="Your Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-            maxLength={255}
-            className="w-full bg-transparent border border-neutral-400 rounded-2xl px-5 py-4 text-base placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900 transition"
-          />
+
           <textarea
             placeholder="Message"
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             rows={5}
             maxLength={1000}
-            className="w-full bg-transparent border border-neutral-400 rounded-2xl px-5 py-4 text-base placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900 transition resize-none"
+            disabled={isSending}
+            className="w-full bg-transparent border border-neutral-400 rounded-2xl px-5 py-4 text-base placeholder:text-neutral-500 focus:outline-none focus:border-neutral-900 transition resize-none disabled:opacity-50"
           />
           <button
             type="submit"
-            className="w-full bg-neutral-900 text-white rounded-2xl py-4 text-base font-medium hover:bg-neutral-800 transition"
+            disabled={isSending}
+            className="w-full bg-neutral-900 text-white rounded-2xl py-4 text-base font-medium hover:bg-neutral-800 transition disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            {sent ? "Message Sent ✓" : "Send Message"}
+            {isSending ? "Sending..." : sent ? "Message Sent ✓" : "Send Message"}
           </button>
         </form>
 

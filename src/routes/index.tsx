@@ -24,6 +24,10 @@ import {
 import { useEffect, useState } from "react";
 import profileImg from "@/assets/profile.png";
 import resumePdf from "@/assets/CRISALDO_RESUME.pdf";
+import archiveImg1 from "@/assets/velocity_overview.png";
+import archiveImg2 from "@/assets/subscription_based_saas.png";
+import archiveImg3 from "@/assets/pvt_analysis_tool.png";
+import archiveImg4 from "@/assets/pizza_sales_analysis.png";
 import { projects as allProjects } from "@/lib/portfolio-data";
 import { ContactModal } from "@/components/ContactModal";
 import { ImageModal } from "@/components/ImageModal";
@@ -58,6 +62,7 @@ const techStack = [
 ];
 
 const projects = allProjects.slice(0, 3);
+const archiveImages = [archiveImg1, archiveImg2, archiveImg3, archiveImg4];
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -67,25 +72,44 @@ function Index() {
   const [lightboxAlt, setLightboxAlt] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    const elements = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-reveal]")
-    );
+  const elements = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-reveal]")
+  );
 
-    if (!elements.length) return;
+  if (!elements.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.2 }
-    );
+  // Track which index each section is at for direction detection
+  const sectionIndexMap = new Map<Element, number>();
+  elements.forEach((el, i) => sectionIndexMap.set(el, i));
 
-    elements.forEach((el) => observer.observe(el));
+  let lastScrollY = window.scrollY;
 
-    return () => observer.disconnect();
-  }, []);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY >= lastScrollY;
+      lastScrollY = currentScrollY;
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        } else {
+          // Re-arm the animation when section leaves viewport
+          // so it replays on both scroll-up and scroll-down
+          entry.target.classList.remove("is-visible");
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "-5% 0px -5% 0px",
+    }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+
+  return () => observer.disconnect();
+}, []);
 
   useEffect(() => {
     if (!window.location.hash) return;
@@ -213,7 +237,7 @@ function Index() {
           <div className="mt-10 grid md:grid-cols-2 gap-6">
             <div className="space-y-6">
               {/* Education */}
-              <div className="bg-white rounded-xl p-7 shadow-sm min-h-[200px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
+              <div data-stagger className="bg-white rounded-xl p-7 shadow-sm min-h-[200px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
                 <div className="flex items-center gap-2 font-semibold text-base">
                   <GraduationCap className="w-5 h-5" /> EDUCATION
                 </div>
@@ -226,7 +250,7 @@ function Index() {
               </div>
 
               {/* Experience */}
-              <div className="bg-white rounded-xl p-7 shadow-sm min-h-[220px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
+              <div data-stagger className="bg-white rounded-xl p-7 shadow-sm min-h-[220px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
                 <div className="flex items-center gap-2 font-semibold text-base">
                   <Briefcase className="w-5 h-5" /> EXPERIENCE
                 </div>
@@ -240,7 +264,7 @@ function Index() {
               </div>
 
               {/* Tech Stack */}
-              <div className="bg-white rounded-xl p-7 shadow-sm flex flex-col justify-center min-h-[200px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
+              <div data-stagger className="bg-white rounded-xl p-7 shadow-sm flex flex-col justify-center min-h-[200px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
                 <div className="flex items-center gap-2 font-semibold text-base">
                   <Cpu className="w-5 h-5" /> TECH STACK
                 </div>
@@ -273,11 +297,12 @@ function Index() {
               </div>
             </div>
 
-            {/* Life outside work */}
-            <div className="bg-white rounded-xl p-7 shadow-sm flex flex-col min-h-[420px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
-              <div className="font-semibold text-base">LIFE OUTSIDE WORK</div>
+            {/* Archives */}
+            <div data-stagger className="bg-white rounded-xl p-7 shadow-sm flex flex-col min-h-[420px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
+              <div className="font-semibold text-base">ARCHIVES</div>
               <div className="mt-4 flex-1 rounded-lg overflow-hidden bg-neutral-900 min-h-[300px] relative">
                 <DomeGallery
+                  images={archiveImages}
                   fit={0.8}
                   minRadius={400}
                   maxVerticalRotationDeg={0}

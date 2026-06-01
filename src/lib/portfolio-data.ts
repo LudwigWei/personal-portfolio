@@ -2,6 +2,9 @@ import velocityOverview from "@/assets/velocity_overview.png";
 import pizzaSales from "@/assets/pizza_sales_analysis.png";
 import subscriptionSaaS from "@/assets/subscription_based_saas.png";
 import pvtAnalysis from "@/assets/pvt_analysis_tool.png";  
+import excelImg from "@/assets/excel.png";
+import { title } from "process";
+
 export const projects = [
   
   // Featured Projects
@@ -48,4 +51,14 @@ export const projects = [
     tool: "https://pvt-analysis-tool-84zrq84qd6ufzzh5p2udqy.streamlit.app/",
     featured: false,
   },
+
+  // Project 5
+  {
+    title: "Excel Analytics Portfolio",
+    desc: "A comprehensive collection of data analysis projects created during my early journey learning Excel. It demonstrates foundational skills in ETL, data modeling, and interactive dashboard creation across various industries, reflecting my drive to transform messy, raw datasets into clean, actionable business insights.",
+    tags: ["Excel", "Power Query", "Power Pivot", "Data Cleaning", "Data Modeling", "Dashboarding"],
+    image: excelImg,
+    repo: "https://github.com/LudwigWei/excel-analytics-portfolio",
+    featured: false,
+  }
 ];

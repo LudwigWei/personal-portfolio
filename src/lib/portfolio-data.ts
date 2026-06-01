@@ -3,6 +3,7 @@ import pizzaSales from "@/assets/pizza_sales_analysis.png";
 import subscriptionSaaS from "@/assets/subscription_based_saas.png";
 import pvtAnalysis from "@/assets/pvt_analysis_tool.png";  
 import excelImg from "@/assets/excel.png";
+import dataCleaning from "@/assets/data_cleaning.png";
 import { title } from "process";
 
 export const projects = [
@@ -60,5 +61,16 @@ export const projects = [
     image: excelImg,
     repo: "https://github.com/LudwigWei/excel-analytics-portfolio",
     featured: false,
-  }
+  },
+
+  // Project 6
+{
+  title: "Thesis Data Cleaning",
+  desc: "The foundational data preparation stage for our thesis on Optimization and Domain-Adaptive Pre-Training of DistilmBERT for Sentiment Analysis in Tagalog-English Code-Switched Text. This project transforms raw e-commerce reviews and synthetic text into a high-quality hybrid corpus, utilizing LaBSE embeddings and cosine similarity for rigorous two-stage semantic deduplication.",
+  tags: ["Python", "LaBSE", "NLP", "Data Cleaning", "Semantic Deduplication"],
+  image: dataCleaning,
+  repo: "https://github.com/LudwigWei/thesis-data-cleaning",
+  featured: false,
+}
 ];
+

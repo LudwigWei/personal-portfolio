@@ -299,7 +299,7 @@ function Index() {
 
             {/* Archives */}
             <div data-stagger className="bg-white rounded-xl p-7 shadow-sm flex flex-col min-h-[420px] border border-transparent hover:border-neutral-300 hover:shadow-md transform transition-all duration-200 hover:scale-105">
-              <div className="font-semibold text-base">ARCHIVES</div>
+              <div className="font-semibold text-base">ARCHIVES (WIP)</div>
               <div className="mt-4 flex-1 rounded-lg overflow-hidden bg-neutral-900 min-h-[300px] relative">
                 <DomeGallery
                   images={archiveImages}

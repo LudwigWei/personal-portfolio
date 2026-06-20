@@ -5,6 +5,7 @@ import pvtAnalysis from "@/assets/pvt_analysis_tool.png";
 import excelImg from "@/assets/excel.png";
 import dataCleaning from "@/assets/data_cleaning.png";
 import databelChurn from "@/assets/databel_analysis.png";
+import sqlDataWarehouse from "@/assets/sql_datawarehouse.png";
 import { title } from "process";
 
 export const projects = [
@@ -37,6 +38,15 @@ export const projects = [
     image: databelChurn,
     repo: "https://github.com/LudwigWei/databel-churn-analysis",
     featured: true,
+  },
+
+  {
+    title: "SQL Data Warehouse",
+    desc: "A production-grade relational data warehouse built with standard SQL to consolidate and harmonize operational data from disparate CRM and ERP systems. Implementing the Medallion Architecture, this project cleanses, standardizes, and models raw datasets into a Kimball-style star schema optimized for scalable reporting and analytical performance.",
+    tags: ["SQL", "Data Modeling", "Data Warehouse", "Medallion Architecture"],
+    image: sqlDataWarehouse,
+    repo: "https://github.com/LudwigWei/sql-data-warehouse",
+    featured: false,
   },
 
   {

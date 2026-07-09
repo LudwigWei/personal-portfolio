@@ -413,7 +413,7 @@ function Index() {
               <p className="text-2xl leading-relaxed text-neutral-700 text-right">
               Dedicated to transforming raw, complex data into actionable, decision-ready insights that fuel strategic growth and innovation. I am actively looking for opportunities where I can contribute to business success while continuously learning, expanding my technical skill set, and advancing toward sophisticated data methodologies.
             </p>
-            <button onClick={() => setContactOpen(true)} className="mt-6 inline-flex items-center justify-center gap-2 bg-back border border-neutral-300 rounded-full px-8 py-3.5 text-md font-medium hover:bg-neutral-50 transition w-40">
+            <button onClick={() => setContactOpen(true)} className="mt-6 inline-flex items-center justify-center gap-2 bg-neutral-900 text-white rounded-full px-8 py-3.5 text-md font-medium hover:bg-neutral-800 transition w-40">
               Connect
             </button>
           </div>

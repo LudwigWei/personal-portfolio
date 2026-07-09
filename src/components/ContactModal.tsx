@@ -25,6 +25,18 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
 
   if (!open) return null;
 
+  function getEmailJsErrorMessage(error: unknown): string {
+    if (typeof error === "string") return error;
+    if (error && typeof error === "object") {
+      const details = error as { text?: unknown; message?: unknown; status?: unknown };
+      const parts = [details.text, details.message, details.status]
+        .filter((part) => part !== undefined && part !== null)
+        .map(String);
+      if (parts.length > 0) return parts.join(" | ");
+    }
+    return "Unknown EmailJS error";
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -40,7 +52,9 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
     try {
       await emailjs.send(serviceId, templateId, {
         user_name: form.name,
+        from_name: form.name,
         user_email: form.email,
+        reply_to: form.email,
         subject: form.subject,
         message: form.message,
       }, publicKey);
@@ -52,7 +66,7 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
       
     } catch (error) {
       console.error("Failed to send email:", error);
-      alert("Failed to send message. Please check your EmailJS setup and try again.");
+      alert(`Failed to send message. EmailJS said: ${getEmailJsErrorMessage(error)}`);
     } finally {
       setIsSending(false);
     }

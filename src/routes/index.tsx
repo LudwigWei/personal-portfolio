@@ -184,9 +184,9 @@ function Index() {
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight">
               Hi, I'm Louis Vincent Crisaldo
             </h1>
-            <p className="mt-5 text-2xl md:text-3xl text-neutral-700 font-['Headland_One']">Aspiring Data Analyst</p>
+            <p className="mt-5 text-2xl md:text-3xl text-neutral-700 font-['Headland_One']">Aspiring Data Professional</p>
             <p className="mt-6 text-base md:text-lg leading-relaxed text-neutral-600 max-w-xl">
-              I have a deep curiosity for how data shapes our world. Echoing <strong>Clive Humby</strong>'s sentiment that <em>"data is the new oil,"</em> I firmly believe in the power of refined information and aspire to become a Data Analyst capable of transforming complex, messy datasets into clear, actionable insights that drive real-world impact.
+              I have a deep curiosity for how data shapes our world. Echoing <strong>Clive Humby</strong>'s sentiment that <em>"data is the new oil,"</em> I firmly believe in the power of refined information and aspire to become a Data Professional capable of transforming complex, messy datasets into clear, actionable insights that drive real-world impact.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-6 text-base text-neutral-700">
               <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> Batangas, Philippines</span>

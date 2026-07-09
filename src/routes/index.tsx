@@ -195,14 +195,14 @@ function Index() {
               </span>
             </div>
             <div className="mt-7 flex flex-wrap gap-4">
-              <a href="#contact" className="inline-flex items-center gap-2 bg-neutral-900 text-white rounded-full px-6 py-3 text-base font-medium hover:bg-neutral-800 transition">
+              <a href="#contact" className="inline-flex items-center gap-2 bg-neutral-900 text-white rounded-full px-6 py-3 text-base font-medium hover:bg-neutral-800 hover:scale-105 transition-transform transition-colors duration-200">
                 <Phone className="w-5 h-5" /> Contact Now
               </a>
               <a
                 href={resumePdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white border border-neutral-300 rounded-full px-6 py-3 text-base font-medium hover:bg-neutral-50 transition"
+                className="inline-flex items-center gap-2 bg-white border border-neutral-300 rounded-full px-6 py-3 text-base font-medium hover:bg-neutral-50 hover:scale-105 transition-transform transition-colors duration-200"
               >
                 <Download className="w-5 h-5" /> Download Resume
               </a>
@@ -413,7 +413,7 @@ function Index() {
               <p className="text-2xl leading-relaxed text-neutral-700 text-right">
               Dedicated to transforming raw, complex data into actionable, decision-ready insights that fuel strategic growth and innovation. I am actively looking for opportunities where I can contribute to business success while continuously learning, expanding my technical skill set, and advancing toward sophisticated data methodologies.
             </p>
-            <button onClick={() => setContactOpen(true)} className="mt-6 inline-flex items-center justify-center gap-2 bg-neutral-900 text-white rounded-full px-8 py-3.5 text-md font-medium hover:bg-neutral-800 transition w-40">
+            <button onClick={() => setContactOpen(true)} className="mt-6 inline-flex items-center justify-center gap-2 bg-neutral-900 text-white rounded-full px-8 py-3.5 text-md font-medium hover:bg-neutral-800 hover:scale-105 transition-transform transition-colors duration-200 w-40">
               Connect
             </button>
           </div>

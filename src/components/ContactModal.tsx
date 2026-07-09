@@ -3,10 +3,14 @@ import emailjs from "@emailjs/browser";
 import { X, Github, Facebook, Instagram, Linkedin } from "lucide-react";
 
 export function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  // 1. Added 'subject' to the initial state
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
   const [isSending, setIsSending] = useState(false);
+
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  const emailJsConfigured = Boolean(serviceId && templateId && publicKey);
 
   useEffect(() => {
     if (!open) return;
@@ -23,33 +27,32 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 2. Added a check to ensure the subject isn't empty
+
     if (!form.name.trim() || !form.email.trim() || !form.subject.trim() || !form.message.trim()) return;
+
+    if (!emailJsConfigured) {
+      alert("Email sending is not configured yet. Add the EmailJS environment variables and try again.");
+      return;
+    }
 
     setIsSending(true);
 
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        {
-          user_name: form.name,
-          user_email: form.email,
-          subject: form.subject, // 3. Passed the subject to EmailJS
-          message: form.message,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
+      await emailjs.send(serviceId, templateId, {
+        user_name: form.name,
+        user_email: form.email,
+        subject: form.subject,
+        message: form.message,
+      }, publicKey);
 
       setSent(true);
-      // 4. Reset subject along with the rest of the form
       setForm({ name: "", email: "", subject: "", message: "" });
       
       setTimeout(() => setSent(false), 3000);
       
     } catch (error) {
       console.error("Failed to send email:", error);
-      alert("Failed to send message. Please check your connection and try again.");
+      alert("Failed to send message. Please check your EmailJS setup and try again.");
     } finally {
       setIsSending(false);
     }
@@ -99,7 +102,6 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
             />
           </div>
           
-          {/* 5. The new Subject Input */}
           <input
             type="text"
             placeholder="Subject"
@@ -121,11 +123,16 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
           />
           <button
             type="submit"
-            disabled={isSending}
+            disabled={isSending || !emailJsConfigured}
             className="w-full bg-neutral-900 text-white rounded-2xl py-4 text-base font-medium hover:bg-neutral-800 transition disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isSending ? "Sending..." : sent ? "Message Sent ✓" : "Send Message"}
           </button>
+          {!emailJsConfigured && (
+            <p className="text-sm text-amber-700">
+              Email sending is disabled until the EmailJS environment variables are set.
+            </p>
+          )}
         </form>
 
         <hr className="my-8 border-neutral-300" />
